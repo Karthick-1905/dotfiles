@@ -1,0 +1,58 @@
+[global]
+interval=5
+separator=true
+separator_block_width=15
+markup=pango
+
+[volume]
+command=~/.config/i3blocks/scripts/volume
+LABEL=♪
+#LABEL=VOL 
+interval=1
+signal=10
+#STEP=5%
+MIXER=default
+#SCONTROL=[determined automatically]
+#NATURAL_MAPPING=0
+
+[spotify]
+label=
+command=~/.config/i3blocks/scripts/spotify.py
+interval=5
+color=#81b71a
+
+[net-speed]
+command=~/.config/i3blocks/scripts/net-speed
+interval=1
+color=#89b4fa
+
+[wireless]
+command=~/.config/i3blocks/scripts/wifi
+interval=5
+
+[ethernet]
+command=~/.config/i3blocks/scripts/ethernet
+interval=10
+
+[battery]
+command=~/.config/i3blocks/scripts/battery
+interval=30
+
+[disk]
+command=~/.config/i3blocks/scripts/disk
+interval=30
+
+[memory]
+command=~/.config/i3blocks/scripts/memory_read
+interval=30
+
+[time]
+command=date '+󰥔 %a %d %b | %H:%M'
+interval=30
+align=center
+
+# [arch-update]
+# command=~/.config/i3blocks/scripts/arch-update
+# interval=3600
+# markup=pango
+

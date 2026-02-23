@@ -1,0 +1,9 @@
+#!/bin/bash
+
+info=$(acpi -b)
+[ -z "$info" ] && exit
+
+status=$(echo "$info" | awk -F', ' '{print $1}' | awk '{print $3}')
+percent=$(echo "$info" | awk -F', ' '{print $2}' | tr -d '%')
+
+printf "󰁹 %s %.2f%%\n" "$status" "$percent"

@@ -1,0 +1,5 @@
+[greenclip]
+history_length = 100
+use_primary_selection_as_input = false
+blacklisted_applications = ["KeePassXC", "Bitwarden"]
+enable_image_support = true

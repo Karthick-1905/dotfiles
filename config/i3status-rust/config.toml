@@ -1,0 +1,120 @@
+[theme]
+theme = "semi-native"
+
+[theme.overrides]
+good_fg = "#93a1a1"
+
+[icons]
+icons = "awesome6"
+
+[icons.overrides]
+backlight = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+
+
+[[block]]
+block = "disk_space"
+path = "/"
+info_type = "available"
+format = " $icon $available.eng(w:4) "
+interval = 20
+warning = 20.0
+alert = 10.0
+
+[[block]]
+block = "memory"
+format = " $icon $mem_used_percents.eng(w:2) "
+
+[[block]]
+block = "memory"
+format = " $icon_swap $swap_used_percents.eng(w:2) "
+
+[[block]]
+block = "custom"
+interval = 10
+command = '''
+timeout 0.8 intel_gpu_top -l 1 2>/dev/null | awk '/Render/ {print "  "$8"%"; exit}'
+'''
+
+[[block]]
+block = "cpu"
+interval = 3
+format = " $icon $utilization "
+
+[[block]]
+block = "load"
+interval = 5
+format = " $icon $1m.eng(w:4) "
+
+[[block]]
+block = "net"
+format = " $icon {$signal_strength $ssid $frequency|Wired} $speed_up.eng(prefix:K) $speed_down.eng(prefix:K) "
+interval = 5
+
+# [[block]]
+# block = "networkmanager"
+# on_click = "alacritty -e nmtui"
+# interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
+# interface_name_include = []
+
+[[block]]
+block = "backlight"
+invert_icons = false
+
+[[block]]
+block = "sound"
+[[block.click]]
+button = "left"
+cmd = "~/.config/i3/scripts/set-default-sound-device.sh"
+
+[[block]]
+block = "battery"
+interval = 10
+format = " $icon $percentage "
+not_charging_format = " $icon  "
+
+[[block]]
+block = "notify"
+
+[[block]]
+block = "custom"
+interval = 3600
+command = '''
+UPDATES=$(paru -Qua | wc -l)
+if [ "$UPDATES" -gt 0 ]; then
+  echo "󰏖 $UPDATES"
+fi
+'''
+
+[[block]]
+block = "custom"
+command = "~/.config/i3/scripts/blocks/fwup"
+hide_when_empty = true
+interval = 86400
+
+[[block]]
+block = "custom"
+interval = 10
+command = '''
+if systemctl is-active --quiet docker; then
+  RUN=$(docker ps -q | wc -l)
+  echo " $RUN"
+fi
+'''
+
+[[block]]
+block = "custom"
+interval = 2
+command = '''
+playerctl -p spotify metadata --format " {{artist}} - {{title}}" 2>/dev/null
+'''
+hide_when_empty = true
+
+
+[[block]]
+block = "uptime"
+
+[[block]]
+block = "time"
+interval = 1
+[block.format]
+full = " $icon $timestamp.datetime(f:'%Y-%m-%d %H:%M:%S(%a)') "

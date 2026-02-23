@@ -1,0 +1,12 @@
+#!/bin/bash
+
+iface=$(ip -o link show | awk -F': ' '$2 ~ /^en/ {print $2}')
+
+[ -z "$iface" ] && exit
+
+state=$(cat /sys/class/net/$iface/operstate 2>/dev/null)
+
+if [ "$state" = "up" ]; then
+    speed=$(ethtool $iface 2>/dev/null | awk -F': ' '/Speed/{print $2}')
+    echo "󰈀 Ethernet $speed"
+fi

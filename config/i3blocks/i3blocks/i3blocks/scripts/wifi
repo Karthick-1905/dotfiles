@@ -1,0 +1,10 @@
+#!/bin/bash
+
+iface=$(iw dev | awk '$1=="Interface"{print $2}')
+[ -z "$iface" ] && exit
+
+ssid=$(iw dev "$iface" link | awk -F': ' '/SSID/{print $2}')
+# speed=$(iw dev "$iface" link | awk '/tx bitrate/{print $3" "$4}')
+ip=$(ip -4 addr show "$iface" | awk '/inet/{print $2}' | cut -d/ -f1)
+
+echo "󰖩 $ssid | $ip"
