@@ -5,7 +5,7 @@
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
-    "height": 26,
+    "height": 30,
     "modules-left": [
       "clock"
      ],
@@ -23,7 +23,8 @@
      "custom/disk",
      "battery",
      "pulseaudio",
-     "pulseaudio#microphone"
+     "pulseaudio#microphone",
+     "tray"
     ],
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -68,8 +69,8 @@
      "tooltip": false
     },
     "tray": {
-        "icon-size": 18,
-        "spacing": 10
+        "icon-size": 20,
+        "spacing": 20
     },
     "clock": { "format": "{:%H:%M | %d %b}", "tooltip-format": "{:%A, %d %B %Y}" },
     "battery": {
@@ -97,7 +98,7 @@
         ]
     },
     "pulseaudio": {
-        "format": "{icon} {volume}%",
+        "format": "{icon}  {volume}%",
         "tooltip": false,
         "format-muted": " Muted",
         "on-click": "pamixer -t",
@@ -132,7 +133,7 @@
         "format-ethernet": "{ipaddr}/{cidr}",
         "tooltip-format": "{essid} - {ifname} via {gwaddr}",
         "format-disconnected": "Disconnected ⚠",
-	      "onclick" : "nm-applet"
+	      "onclick" : "/usr/bin/nm-applet"
     },
     "bluetooth": {
       "format": " {status}",
