@@ -1,0 +1,144 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 26,
+    "modules-left": [
+      "clock"
+     ],
+
+    "modules-center": [
+     "custom/arch",
+     "hyprland/workspaces"
+    ],
+
+    "modules-right": [
+     "network",
+     "bluetooth",
+     "custom/cpu",
+     "custom/memory",
+     "custom/disk",
+     "battery",
+     "pulseaudio",
+     "pulseaudio#microphone"
+    ],
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "format-icons": {
+   	 "1": "  Web",
+   	 "2": "  Code",
+   	 "3": "  Terminal",
+   	 "4": "  Files",
+  	 "5": "  Music"
+	},
+	"persistent_workspaces": {
+            "*": 1
+        }
+    },
+    "hyprland/window": {
+        "format": "{}"
+    }, 
+    "custom/cpu": {
+      "format": "  {}",
+      "interval": 2,
+      "exec": "grep 'cpu ' /proc/stat | awk '{u=($2+$4)*100/($2+$4+$5)} END {printf(\"%.0f%%\", u)}'",
+      "on-click": "kitty -e btop",
+      "tooltip": true
+    },
+    "custom/disk": {
+      "format": "  {}",
+      "interval": 60,
+      "exec": "df -h / | awk 'NR==2 {print $4}'",
+      "tooltip": true,
+      "tooltip-format": "Disk Free"
+    },
+    "custom/memory": {
+        "tooltip": true,
+        "format": "{}",
+        "interval": 30,
+        "exec": "free -h | awk '/Mem:/ {print $3\"/\"$2}'"
+    },
+    "custom/arch": {
+     "format": "  ",
+     "tooltip": false
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+    "clock": { "format": "{:%H:%M | %d %b}", "tooltip-format": "{:%A, %d %B %Y}" },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 40,
+            "critical": 30
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": [
+            "󰂎",
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰂂",
+            "󰁹"
+        ]
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "tooltip": false,
+        "format-muted": " Muted",
+        "on-click": "pamixer -t",
+        "on-scroll-up": "pamixer -i 5",
+        "on-scroll-down": "pamixer -d 5",
+        "scroll-step": 100,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        }
+    },
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": " Muted",
+        "on-click": "pamixer --default-source -t",
+        "on-scroll-up": "pamixer --default-source -i 5",
+        "on-scroll-down": "pamixer --default-source -d 5",
+        "scroll-step": 5
+    },
+    "network": {
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "{ipaddr}/{cidr}",
+        "tooltip-format": "{essid} - {ifname} via {gwaddr}",
+        "format-disconnected": "Disconnected ⚠",
+	      "onclick" : "nm-applet"
+    },
+    "bluetooth": {
+      "format": " {status}",
+      "format-disabled": " Off",
+      "format-connected": " {num_connections}",
+      "tooltip-format": "{device_alias}",
+      "on-click": "blueman-manager"
+    }
+}
